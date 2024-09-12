@@ -22,7 +22,7 @@ const RansomChat = ({ companyName }) => {
   useEffect(() => {
     const initialMessage = {
       sender: 'ransomware',
-      content: `Your data has been encrypted. To recover the decryption key, you must pay the total amount within the next 48 hours.`,
+      content: `Your data has been encrypted. To recover the decryption key, you must pay the total amount before the deadline.`,
       timestamp: new Date().toISOString()
     };
     setMessages([initialMessage]);
