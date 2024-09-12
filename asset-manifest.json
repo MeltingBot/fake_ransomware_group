@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/h4ck3r/static/css/main.fe2376c3.css",
-    "main.js": "/h4ck3r/static/js/main.fac668f9.js",
-    "index.html": "/h4ck3r/index.html",
-    "main.fe2376c3.css.map": "/h4ck3r/static/css/main.fe2376c3.css.map",
-    "main.fac668f9.js.map": "/h4ck3r/static/js/main.fac668f9.js.map"
+    "main.css": "/fake_ransomware_group/static/css/main.fe2376c3.css",
+    "main.js": "/fake_ransomware_group/static/js/main.780c082f.js",
+    "index.html": "/fake_ransomware_group/index.html",
+    "main.fe2376c3.css.map": "/fake_ransomware_group/static/css/main.fe2376c3.css.map",
+    "main.780c082f.js.map": "/fake_ransomware_group/static/js/main.780c082f.js.map"
   },
   "entrypoints": [
     "static/css/main.fe2376c3.css",
-    "static/js/main.fac668f9.js"
+    "static/js/main.780c082f.js"
   ]
 }
