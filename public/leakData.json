@@ -1,0 +1,145 @@
+{
+    "companies": [
+      {
+        "name": "TechNova Solutions",
+        "industry": "Information Technology",
+        "dataTypes": ["Employee Names", "Email Addresses", "Project Details", "Client Information"],
+        "recordsAffected": 50000,
+        "ransom": 2.1,
+        "deadline": 72,
+        "leakDate": "2024-09-17",
+        "sampleData": [
+          "Jean Lefevre | jean.lefevre@technova.com | Project: AI Integration for ClientCorp",
+          "Amélie Rousseau | amelie.rousseau@technova.com | Client: Global Innovations Inc.",
+          "Thomas Moreau | thomas.moreau@technova.com | Project: Cybersecurity Upgrade for FinanceFirst"
+        ],
+        "leakedDocuments": [
+          {"name": "TechNova_ProductRoadmap_2024-2026.pdf", "type": "pdf", "description": "Confidential product development plans for the next two years", "url": "/data/TechNova_ProductRoadmap_2024-2026.pdf"},
+          {"name": "TechNova_ClientContracts_2024.csv", "type": "csv", "description": "Detailed list of all client contracts, including financial terms and project scopes", "url": "/data/TechNova_ClientContracts_2024.csv"},
+          {"name": "TechNova_EmployeeData_2024.csv", "type": "csv", "description": "Comprehensive employee database with personal and professional information", "url": "/data/TechNova_EmployeeData_2024.csv"}
+        ]
+      },
+      {
+        "name": "HealthPlus Medical Center",
+        "industry": "Healthcare",
+        "dataTypes": ["Patient Names", "Medical Records", "Insurance Information", "Appointment History"],
+        "recordsAffected": 100000,
+        "ransom": 3.75,
+        "deadline": 120,
+        "leakDate": "2024-09-20",
+        "sampleData": [
+          "François Dupont | Patient ID: HP78901 | Diagnosis: Hypertension | Insurance: MediSecure #12345678",
+          "Isabelle Leroux | Patient ID: HP78902 | Appointment: Cardiology 15/09/2024 | Insurance: HealthGuard #87654321",
+          "Michel Bertrand | Patient ID: HP78903 | Medication: Metformin 500mg | Insurance: WellCare #23456789"
+        ],
+        "leakedDocuments": [
+          {"name": "HealthPlus_PatientRecords_2024.csv", "type": "csv", "description": "Comprehensive patient database including medical history and personal information", "url": "/data/HealthPlus_PatientRecords_2024.csv"},
+          {"name": "HealthPlus_DrugTrialResults_2024.pdf", "type": "pdf", "description": "Detailed results of recent drug trials, including sensitive research data", "url": "/data/HealthPlus_DrugTrialResults_2024.pdf"},
+          {"name": "HealthPlus_InsuranceClaims_2024.csv", "type": "csv", "description": "Complete record of all insurance claims filed in 2024", "url": "/data/HealthPlus_InsuranceClaims_2024.csv"}
+        ]
+      },
+      {
+        "name": "FinSecure Bank",
+        "industry": "Finance",
+        "dataTypes": ["Account Numbers", "Credit Card Details", "Transaction History", "Customer Personal Data"],
+        "recordsAffected": 250000,
+        "ransom": 2.5,
+        "deadline": 96,
+        "leakDate": "2024-10-05",
+        "sampleData": [
+            "Jean Martin | Account Number: FS123456789 | Transaction: 5000€ | Card: Visa #12345678",
+            "Marie Durand | Account Number: FS987654321 | Loan Application: 20000€ | Card: MasterCard #87654321",
+            "Alain Lefevre | Account Number: FS654987321 | Savings Balance: 15000€ | Card: Amex #23456789"
+        ],
+        "leakedDocuments": [
+            {
+                "name": "FinSecure_CustomerAccounts_2024.csv",
+                "type": "csv",
+                "description": "Customer accounts data, including balances and personal information",
+                "url": "/data/FinSecure_CustomerAccounts_2024.csv"
+            },
+            {
+                "name": "FinSecure_CreditCardInfo_2024.pdf",
+                "type": "pdf",
+                "description": "Sensitive credit card details of clients",
+                "url": "/data/FinSecure_CreditCardInfo_2024.pdf"
+            },
+            {
+                "name": "FinSecure_TransactionHistory_2024.csv",
+                "type": "csv",
+                "description": "Complete transaction history for all customers in 2024",
+                "url": "/data/FinSecure_TransactionHistory_2024.csv"
+            }
+        ]
+    },
+    {
+        "name": "EduLearn University",
+        "industry": "Education",
+        "dataTypes": ["Student Names", "Grades", "Attendance Records", "Financial Aid Details"],
+        "recordsAffected": 75000,
+        "ransom": 2.3,
+        "deadline": 72,
+        "leakDate": "2024-09-30",
+        "sampleData": [
+            "Claire Thomas | Student ID: EL20249001 | GPA: 3.8 | Scholarship: Excellence Fund #12345",
+            "Lucas Giraud | Student ID: EL20249002 | Attendance: 95% | Aid: Study Grant #87654",
+            "Pauline Roche | Student ID: EL20249003 | GPA: 3.5 | Loan: EduLoan #23456"
+        ],
+        "leakedDocuments": [
+            {
+                "name": "EduLearn_StudentGrades_2024.csv",
+                "type": "csv",
+                "description": "Comprehensive student grades data for 2024",
+                "url": "/data/EduLearn_StudentGrades_2024.csv"
+            },
+            {
+                "name": "EduLearn_FinancialAid_2024.pdf",
+                "type": "pdf",
+                "description": "Detailed records of financial aid awarded to students",
+                "url": "/data/EduLearn_FinancialAid_2024.pdf"
+            },
+            {
+                "name": "EduLearn_AttendanceRecords_2024.csv",
+                "type": "csv",
+                "description": "Complete student attendance records for 2024",
+                "url": "/data/EduLearn_AttendanceRecords_2024.csv"
+            }
+        ]
+    },
+    {
+        "name": "TechSolutions Inc.",
+        "industry": "Technology",
+        "dataTypes": ["Client Contracts", "Employee Personal Data", "Project Plans", "Financial Reports"],
+        "recordsAffected": 50000,
+        "ransom": 3.7,
+        "deadline": 108,
+        "leakDate": "2024-10-15",
+        "sampleData": [
+            "Nathalie Lefort | Client ID: TS456 | Contract: Cloud Migration | Budget: 30000€",
+            "Bernard Olivier | Employee ID: TS1023 | Position: Senior Developer | Salary: 75000€",
+            "Vincent Perez | Project ID: TS5001 | Plan: Mobile App Development | Deadline: 01/12/2024"
+        ],
+        "leakedDocuments": [
+            {
+                "name": "TechSolutions_ClientContracts_2024.csv",
+                "type": "csv",
+                "description": "Client contract details, including budgets and timelines",
+                "url": "/data/TechSolutions_ClientContracts_2024.csv"
+            },
+            {
+                "name": "TechSolutions_ProjectPlans_2024.pdf",
+                "type": "pdf",
+                "description": "Project plans with sensitive development and deployment data",
+                "url": "/data/TechSolutions_ProjectPlans_2024.pdf"
+            },
+            {
+                "name": "TechSolutions_FinancialReports_2024.csv",
+                "type": "csv",
+                "description": "Financial reports including profit and loss statements for 2024",
+                "url": "/data/TechSolutions_FinancialReports_2024.csv"
+            }
+        ]
+    }
+    
+    ]
+  }
