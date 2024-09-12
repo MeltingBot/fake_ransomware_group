@@ -2,7 +2,7 @@
     "name": "ransomware-simulation-dashboard",
     "version": "1.0.0",
     "private": true,
-    "homepage": "https://meletingbot.github.io/h4ck3r",
+    "homepage": "https://meltingbot.github.io/fake_ransomware_group",
     "dependencies": {
         "lucide-react": "^0.288.0",
         "react": "^18.2.0",
