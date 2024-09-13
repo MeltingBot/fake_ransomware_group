@@ -3,6 +3,7 @@ import { ShieldCheck } from 'lucide-react';
 
 const AntiBotLoading = ({ onLoadingComplete }) => {
   const [loadingStep, setLoadingStep] = useState(0);
+  const [isBypassActive, setIsBypassActive] = useState(false);
   const steps = [
     "Initializing security protocols...",
     "Verifying browser fingerprint...",
@@ -12,28 +13,40 @@ const AntiBotLoading = ({ onLoadingComplete }) => {
     "Access granted. Loading data..."
   ];
 
-  const updateStep = useCallback(() => {
-    setLoadingStep((prevStep) => {
-      if (prevStep < steps.length - 1) {
-        return prevStep + 1;
-      }
-      return prevStep;
-    });
-  }, [steps.length]);
+  const handleKeyDown = useCallback((event) => {
+    if (event.key === 'Shift') {
+      setIsBypassActive(true);
+      onLoadingComplete();
+    }
+  }, [onLoadingComplete]);
 
   useEffect(() => {
-    let timer;
-    if (loadingStep < steps.length - 1) {
-      // Augmenter le délai entre chaque étape à 2 secondes
-      timer = setTimeout(updateStep, 2000);
-    } else if (loadingStep === steps.length - 1) {
-      // Ajouter un délai supplémentaire à la fin avant de terminer le chargement
-      timer = setTimeout(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  useEffect(() => {
+    if (isBypassActive) return;
+
+    const interval = setInterval(() => {
+      setLoadingStep((prevStep) => {
+        if (prevStep < steps.length - 1) {
+          return prevStep + 1;
+        }
+        clearInterval(interval);
         onLoadingComplete();
-      }, 3000);
-    }
-    return () => clearTimeout(timer);
-  }, [loadingStep, steps.length, updateStep, onLoadingComplete]);
+        return prevStep;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isBypassActive, steps.length, onLoadingComplete]);
+
+  if (isBypassActive) {
+    return null;
+  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
