@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Skull, Bitcoin, Eye, Building2, Timer,FileText, FileSpreadsheet,Calendar,MessageCircle } from 'lucide-react';
 import AntiBotLoading from './AntiBotLoading'; // Assurez-vous que le chemin d'importation est correct
 import RansomChat from './RansomChat';  // Assurez-vous d'importer le composant
+
 
 const FileIcon = ({ fileType }) => {
   switch (fileType) {
@@ -14,12 +15,50 @@ const FileIcon = ({ fileType }) => {
   }
 };
 
+const useContainerWidth = () => {
+  const [width, setWidth] = useState(0);
+  const containerRef = useRef(null);
+
+  const handleResize = useCallback((entries) => {
+    if (entries[0]) {
+      setWidth(entries[0].contentRect.width);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [handleResize]);
+
+  return [containerRef, width];
+};
+
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + '...';
+};
+
+
 const LeakContainer = ({ company }) => {
   const [showSample, setShowSample] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
   const [showChat, setShowChat] = useState(false);
+  const [containerRef, containerWidth] = useContainerWidth();
+  const getTruncateLength = useCallback(() => {
+    if (containerWidth < 400) return 30;
+    if (containerWidth < 600) return 50;
+    if (containerWidth < 800) return 70;
+    return 100;
+  }, [containerWidth]);
+
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-md mb-6 border-l-4 border-red-500 text-white">
+    <div ref={containerRef} className="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md mb-6 border-l-4 border-red-500 text-white">
       <h3 className="text-xl font-semibold mb-3 flex items-center">
         <Building2 className="mr-2 text-yellow-500" /> {company.name}
       </h3>
@@ -32,24 +71,24 @@ const LeakContainer = ({ company }) => {
         <Calendar className="mr-2 text-blue-400" size={16} />
         <strong>Leak Date:</strong> {company.leakDate}
       </p>
-      <div className="flex space-x-4">
+      <div className="flex flex-wrap gap-2 mt-4">
         <button 
-          className="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded flex items-center"
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
           onClick={() => setShowSample(!showSample)}
         >
-          <Eye className="mr-2" /> {showSample ? "Hide" : "Show"} Sample Data
+          <Eye className="mr-1" size={16}  /> {showSample ? "Hide" : "Show"} Sample
         </button>
         <button 
-          className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
           onClick={() => setShowDocuments(!showDocuments)}
         >
-          <FileText className="mr-2" /> {showDocuments ? "Hide" : "Show"} Leaked Documents
+          <FileText className="mr-1" size={16}  /> {showDocuments ? "Hide" : "Show"} Docs 
         </button>
         <button 
-          className="mt-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded flex items-center"
-          onClick={() => setShowChat(!showChat)}
+         className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
+         onClick={() => setShowChat(!showChat)}
         >
-          <MessageCircle className="mr-2" /> {showChat ? "Hide" : "Show"} Ransom Chat
+          <MessageCircle className="mr-1" size={16}  /> {showChat ? "Hide" : "Show"} Chat
         </button>
       </div>
       {showSample && (
@@ -57,7 +96,9 @@ const LeakContainer = ({ company }) => {
           <h4 className="text-lg font-semibold mb-2">Sample of Leaked Data:</h4>
           <ul className="list-disc list-inside">
             {company.sampleData.map((item, index) => (
-              <li key={index} className="mb-1">{item}</li>
+               <li key={index} className="mb-1 overflow-hidden text-ellipsis whitespace-nowrap">
+               {truncateText(item, getTruncateLength())}
+             </li>
             ))}
           </ul>
         </div>
@@ -72,12 +113,18 @@ const LeakContainer = ({ company }) => {
           <h4 className="text-lg font-semibold mb-2">Leaked Documents:</h4>
           <ul className="list-disc list-inside">
             {company.leakedDocuments.map((doc, index) => (
-              <li key={index} className="mb-1 flex items-center">
-                <FileIcon fileType={doc.type} />
-                <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-100">
-                  {doc.name} - {doc.description}
-                </a>
-              </li>
+            <li key={index} className="mb-1 flex items-center">
+            <FileIcon fileType={doc.type} />
+            <a 
+              href={doc.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-300 hover:text-blue-100 overflow-hidden text-ellipsis whitespace-nowrap"
+              title={`${doc.name} - ${doc.description}`}
+            >
+              {truncateText(`${doc.name} - ${doc.description}`, getTruncateLength())}
+            </a>
+          </li>
             ))}
           </ul>
         </div>
@@ -142,7 +189,7 @@ const Dashboard = () => {
     <div className="p-6 max-w-4xl mx-auto bg-black min-h-screen text-green-500 font-mono">
      <header className="mb-8">
      <h1 className="text-4xl font-bold mb-4 text-red-500 flex items-center justify-center">
-          <Skull className="mr-2" /> Fake Ransomware Group <Skull className="mr-2" />
+          <Skull className="mr-2" /> Fake Ransomware Group
         </h1>
      <div className="flex justify-center mb-4">
           <img 
