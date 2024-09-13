@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/fake_ransomware_group/static/css/main.41f670f5.css",
-    "main.js": "/fake_ransomware_group/static/js/main.bee3e914.js",
+    "main.js": "/fake_ransomware_group/static/js/main.9262f7b3.js",
     "index.html": "/fake_ransomware_group/index.html",
     "main.41f670f5.css.map": "/fake_ransomware_group/static/css/main.41f670f5.css.map",
-    "main.bee3e914.js.map": "/fake_ransomware_group/static/js/main.bee3e914.js.map"
+    "main.9262f7b3.js.map": "/fake_ransomware_group/static/js/main.9262f7b3.js.map"
   },
   "entrypoints": [
     "static/css/main.41f670f5.css",
-    "static/js/main.bee3e914.js"
+    "static/js/main.9262f7b3.js"
   ]
 }
