@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Skull, Bitcoin, Eye, Building2, Timer,FileText, FileSpreadsheet,Calendar,MessageCircle } from 'lucide-react';
+import { Skull, Bitcoin, Eye, Building2,FileText, FileSpreadsheet,Calendar,MessageCircle,Download } from 'lucide-react';
 import AntiBotLoading from './AntiBotLoading'; // Assurez-vous que le chemin d'importation est correct
 import RansomChat from './RansomChat';  // Assurez-vous d'importer le composant
 
@@ -50,6 +50,7 @@ const LeakContainer = ({ company }) => {
   const [showDocuments, setShowDocuments] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [containerRef, containerWidth] = useContainerWidth();
+
   const getTruncateLength = useCallback(() => {
     if (containerWidth < 400) return 30;
     if (containerWidth < 600) return 50;
@@ -65,73 +66,87 @@ const LeakContainer = ({ company }) => {
       <p className="mb-2"><strong>Industry:</strong> {company.industry}</p>
       <p className="mb-2"><strong>Data Types:</strong> {company.dataTypes.join(', ')}</p>
       <p className="mb-2"><strong>Records Affected:</strong> {company.recordsAffected.toLocaleString()}</p>
-      <p className="mb-2 flex items-center"><Bitcoin className="mr-2 text-yellow-400" size={16}/><strong>Ransom:</strong> {company.ransom.toFixed(2)} BTC</p>
-      <p className="mb-2 flex items-center"><Timer className="mr-2 text-red-400" size={16}/><strong>Deadline:</strong> {company.deadline} hours</p>
+      <p className="mb-2"><strong>Ransom:</strong> {company.ransom.toFixed(2)} BTC</p>
+      <p className="mb-2"><strong>Deadline:</strong> {company.deadline} hours</p>
       <p className="mb-2 flex items-center">
         <Calendar className="mr-2 text-blue-400" size={16} />
         <strong>Leak Date:</strong> {company.leakDate}
       </p>
+      
       <div className="flex flex-wrap gap-2 mt-4">
         <button 
           className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
           onClick={() => setShowSample(!showSample)}
         >
-          <Eye className="mr-1" size={16}  /> {showSample ? "Hide" : "Show"} Sample
+          <Eye className="mr-1" size={16} /> {showSample ? "Hide" : "Show"} Sample
         </button>
         <button 
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
           onClick={() => setShowDocuments(!showDocuments)}
         >
-          <FileText className="mr-1" size={16}  /> {showDocuments ? "Hide" : "Show"} Docs 
+          <FileText className="mr-1" size={16} /> {showDocuments ? "Hide" : "Show"} Docs
         </button>
         <button 
-         className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
-         onClick={() => setShowChat(!showChat)}
+          className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
+          onClick={() => setShowChat(!showChat)}
         >
-          <MessageCircle className="mr-1" size={16}  /> {showChat ? "Hide" : "Show"} Chat
+          <MessageCircle className="mr-1" size={16} /> {showChat ? "Hide" : "Show"} Chat
         </button>
+        {company.sampleLink && (
+          <a 
+            href={company.sampleLink}
+            download
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
+          >
+            <Download className="mr-1" size={16} /> Download Sample
+          </a>
+        )}
       </div>
+      
       {showSample && (
         <div className="mt-4 bg-gray-700 p-4 rounded">
           <h4 className="text-lg font-semibold mb-2">Sample of Leaked Data:</h4>
           <ul className="list-disc list-inside">
             {company.sampleData.map((item, index) => (
-               <li key={index} className="mb-1 overflow-hidden text-ellipsis whitespace-nowrap">
-               {truncateText(item, getTruncateLength())}
-             </li>
+              <li key={index} className="mb-1 overflow-hidden text-ellipsis whitespace-nowrap">
+                {truncateText(item, getTruncateLength())}
+              </li>
             ))}
           </ul>
         </div>
       )}
-      {showChat && (
-        <div className="mt-4">
-          <RansomChat companyName={company.name} />
-        </div>
-      )}
+      
       {showDocuments && (
         <div className="mt-4 bg-gray-700 p-4 rounded">
           <h4 className="text-lg font-semibold mb-2">Leaked Documents:</h4>
           <ul className="list-disc list-inside">
             {company.leakedDocuments.map((doc, index) => (
-            <li key={index} className="mb-1 flex items-center">
-            <FileIcon fileType={doc.type} />
-            <a 
-              href={doc.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-blue-300 hover:text-blue-100 overflow-hidden text-ellipsis whitespace-nowrap"
-              title={`${doc.name} - ${doc.description}`}
-            >
-              {truncateText(`${doc.name} - ${doc.description}`, getTruncateLength())}
-            </a>
-          </li>
+              <li key={index} className="mb-1 flex items-center">
+                <FileIcon fileType={doc.type} />
+                <a 
+                  href={`${process.env.PUBLIC_URL}${doc.url}`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-300 hover:text-blue-100 overflow-hidden text-ellipsis whitespace-nowrap"
+                  title={`${doc.name} - ${doc.description}`}
+                >
+                  {truncateText(`${doc.name} - ${doc.description}`, getTruncateLength())}
+                </a>
+              </li>
             ))}
           </ul>
+        </div>
+      )}
+      
+      {showChat && (
+        <div className="mt-4">
+          <RansomChat companyName={company.name} />
         </div>
       )}
     </div>
   );
 };
+
 
 
 const Dashboard = () => {
