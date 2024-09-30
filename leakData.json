@@ -1,5 +1,26 @@
 {
+    
     "companies": [
+        {
+            "name": "Sevres Escapades",
+            "industry": "Tourism",
+            "dataTypes": ["Customers Name", "Employees Data", "Partners Banking info", "Product Information"],
+            "recordsAffected": 50000,
+            "ransom": 1.8,
+            "deadline": 72,
+            "leakDate": "2024-09-30",
+            "sampleLink":"/data/data_se.csv",
+            "sampleData": [
+              "1,Li,Wei,Chine,wei.li@163.com,+86-10-1234-5678,EG1234567,2024-01-15,Visite du Marais Poitevin,1500.00,Carte de Crédit",
+              "2,Dupont,Marie,France,marie.dupont@gmail.com,+33-1-23-45-67-89,FR7654321,2024-02-20,Circuit Vélodyssée,2000.00,Virement Bancaire",
+              "3,Smith,John,États-Unis,john.smith@yahoo.com,+1-555-123-4567,US9876543,2024-03-10,Château de Coudray,1800.00,PayPal"
+            ],
+            "leakedDocuments": [
+              {"name": "Facture_hotel_marais.pdf", "type": "pdf", "description": "Hotel du Marais Invoice", "url": "/data/facture_hotel_marais.pdf"},
+              {"name": "Courrier_agglo.pdf", "type": "pdf", "description": "Letter to Niort City", "url": "/data/courrier_agglo.pdf"},
+              {"name": "courrier_golden_tourism.pdf", "type": "pdf", "description": "Letter to Chinese Customer", "url": "/data/courrier_golden_tourism.pdf"}
+            ]
+          },
       {
         "name": "TechNova Solutions",
         "industry": "Information Technology",
@@ -45,7 +66,7 @@
         "recordsAffected": 250000,
         "ransom": 2.5,
         "deadline": 96,
-        "leakDate": "2024-10-05",
+        "leakDate": "2024-09-05",
         "sampleData": [
             "Jean Martin | Account Number: FS123456789 | Transaction: 5000€ | Card: Visa #12345678",
             "Marie Durand | Account Number: FS987654321 | Loan Application: 20000€ | Card: MasterCard #87654321",
@@ -79,7 +100,7 @@
         "recordsAffected": 75000,
         "ransom": 2.3,
         "deadline": 72,
-        "leakDate": "2024-09-30",
+        "leakDate": "2024-09-29",
         "sampleData": [
             "Claire Thomas | Student ID: EL20249001 | GPA: 3.8 | Scholarship: Excellence Fund #12345",
             "Lucas Giraud | Student ID: EL20249002 | Attendance: 95% | Aid: Study Grant #87654",
@@ -113,7 +134,7 @@
         "recordsAffected": 50000,
         "ransom": 3.7,
         "deadline": 108,
-        "leakDate": "2024-10-15",
+        "leakDate": "2024-10-01",
         "sampleData": [
             "Nathalie Lefort | Client ID: TS456 | Contract: Cloud Migration | Budget: 30000€",
             "Bernard Olivier | Employee ID: TS1023 | Position: Senior Developer | Salary: 75000€",
