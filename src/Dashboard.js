@@ -94,7 +94,7 @@ const LeakContainer = ({ company }) => {
         </button>
         {company.sampleLink && (
           <a 
-            href={company.sampleLink}
+            href={`${process.env.PUBLIC_URL}${company.sampleLink}`}
             download
             className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex items-center text-sm"
           >
